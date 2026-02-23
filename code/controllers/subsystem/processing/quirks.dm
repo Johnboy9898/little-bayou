@@ -19,8 +19,8 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	var/list/cached_all_categories = list() // A list of all categories, for the tgui
 	var/list/cached_all_quirks = list() // A list of all quirks, sorted by name, for the tgui -- no categories!
 	var/top_quirk // The top quirk, for the tgui
-	var/max_points = 100 // Hey guess where this was
-	var/max_good_quirks = 6 // Hey guess where this was
+	var/max_points = 1000 // Hey guess where this was
+	var/max_good_quirks = 100 // Hey guess where this was
 
 	/// Demographic shit
 	/// How many people took each quirk
@@ -57,7 +57,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 				conflictables -= conflict
 				T.conflicts += conflict
 	saneitze_conflicts()
-	
+
 	/// Now, lets pre-make the tgui data tree thing, for hyperspeed caching
 	FormatifyQuirks()
 
@@ -324,7 +324,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	var/balance = GetQuirkBalance(P, TRUE)
 	var/goods = GetPositiveQuirkCount(P)
 	if(balance > max_points || goods > max_good_quirks)
-		PruneQuirksUntilBalanced(P, balance)	
+		PruneQuirksUntilBalanced(P, balance)
 	var/list/bad_quirks = list()
 	for(var/qstring in quirklist)
 		var/datum/quirk/Q = GetQuirk(qstring)
@@ -746,7 +746,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 /mob/verb/configure_quirks()
 	set name = "Configure Quirks"
 	set category = "Preferences"
-	
+
 	if(!SSquirks.init_order)
 		to_chat(src, span_warning("Quirks are not initialized yet! Please wait a moment and try again."))
 		return

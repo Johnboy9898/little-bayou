@@ -32,11 +32,11 @@ OOC_DURING_ROUND
 ## To speed things up make the number negative, to slow things down, make the number positive.
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
-RUN_DELAY 3.4
-WALK_DELAY 4.4
+RUN_DELAY 1.8
+WALK_DELAY 2.8
 
 ## This is subtracted from the run speed to get the final sprint speed.
-SPRINT_SPEED_INCREASE 1.5
+SPRINT_SPEED_INCREASE 1.1
 ## Size of sprint buffer, in tiles.
 SPRINT_BUFFER_MAX 15
 ## Number of sprint buffer tiles regained per second.
@@ -717,7 +717,7 @@ BODY_SIZE_SLOWDOWN_MULTIPLIER 0.25
 #USE_FIELD_OF_VISION
 
 ## Sets how many quirk points you get at the start
-QUIRK_POINTS 5
+QUIRK_POINTS 3000
 
 ## Sets how many validballs to try and spawn
 VALIDBALL_COUNT 1

@@ -10,8 +10,6 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	desc = "A horrible nest full of monsters."
 	icon = 'icons/mob/nest_new.dmi'
 	icon_state = "hole"
-	alpha = 0 
-	mouse_opacity = 0
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
@@ -35,9 +33,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	/// max mobs that can be alive and nearby before it refuses to spawn more
 	var/max_mobs = 1
 	/// A player must be within this range for it to actually spawn
-	var/radius = 19
-	/// min radius that the nest will not spawn if a player is within
-	var/min_radius = 13
+	var/radius = 10
 	/// Sound to play when a thing spawns
 	var/spawnsound
 	/// Its infinite!
@@ -311,7 +307,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 						/mob/living/simple_animal/hostile/molerat/micro = 10,
 						/mob/living/simple_animal/hostile/molerat/leader = 1
 	)
-	
+
 
 /obj/structure/nest/mirelurk
 	name = "mirelurk nest"
@@ -319,7 +315,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	mob_types = list(/mob/living/simple_animal/hostile/mirelurk = 2,
 					/mob/living/simple_animal/hostile/mirelurk/hunter = 1,
 					/mob/living/simple_animal/hostile/mirelurk/baby = 8)
-	
+
 /obj/structure/nest/rat
 	name = "rat nest"
 	max_mobs = 6
@@ -416,7 +412,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 		/mob/living/simple_animal/hostile/gecko/legacy/alpha = 3,
 		/mob/living/simple_animal/hostile/gecko/big          = 2,
 		)
-	
+
 
 /obj/structure/nest/gecko/Initialize()
 	if(prob(10))

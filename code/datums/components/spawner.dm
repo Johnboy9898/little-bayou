@@ -14,9 +14,7 @@
 	/// sound to play when the thing spawns a thing
 	var/spawn_sound
 	/// The minimum distance to a client before we can start spawning mobs.
-	var/range = 16
-	/// min radius that the nest will not spawn if a player is within
-	var/min_range = 10
+	var/range = 10
 	/// Override the mob's faction with this!
 	var/list/faction = list("mining")
 	/// If not infinite, we delete our parent when we hit max_mobs.
@@ -65,7 +63,6 @@
 		// _spawn_text,
 		_max_mobs,
 		_range,
-		_min_range,
 		_overpopulation_range,
 		_spawn_sound,
 		_infinite,
@@ -100,8 +97,6 @@
 		max_mobs = _max_mobs
 	if(_range)
 		range = _range
-	if(_min_range)
-		min_range = _min_range
 	if(_overpopulation_range)
 		overpopulation_range = _overpopulation_range
 	if(_swarm_size)
@@ -328,11 +323,8 @@
 		return TRUE
 	var/atom/P = parent
 	for(var/mob/living/butt in LAZYACCESS(SSmobs.clients_by_zlevel, P?.z)) // client-containing mobs, NOT clients
-		var/mrange = (get_dist(P, butt))
-		if(mrange <= range)
+		if(get_dist(P, butt) <= range)
 			if(am_special)
-				return TRUE
-			else if(mrange > min_range)
 				return TRUE
 
 /// first checks if anyone is in range, then if so, turns itself on for another 20ish seconds
@@ -750,7 +742,7 @@
 				potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
 				if(prob(50))
 					potentials |= typesof(/mob/living/simple_animal/hostile/securitron) // branch off to a whole other tree!
-				potentials -= /mob/living/simple_animal/hostile/handy 
+				potentials -= /mob/living/simple_animal/hostile/handy
 				potentials -= mobpath
 			else // some other wierd hendybot
 				potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
@@ -819,7 +811,7 @@
 				potentials |= typesof(/mob/living/simple_animal/hostile/giantant)
 				potentials |= typesof(/mob/living/simple_animal/hostile/pillbug)
 			potentials -= mobpath
-		/// larger animals 
+		/// larger animals
 		else if(ispath(mobpath, /mob/living/simple_animal/hostile/gorilla)\
 			|| ispath(mobpath, /mob/living/simple_animal/hostile/bear)\
 			|| ispath(mobpath, /mob/living/simple_animal/hostile/wolf)\
@@ -885,7 +877,7 @@
 			if(istype(mobpath, /mob/living/simple_animal/hostile/molerat) && prob(80))
 				potentials |= typesof(/mob/living/simple_animal/hostile/molerat)
 				potentials -= /mob/living/simple_animal/hostile/molerat
-			else			
+			else
 				potentials |= typesof(/mob/living/simple_animal/hostile/gecko)
 				potentials -= typesof(/mob/living/simple_animal/hostile/gecko/debug)
 				if(prob(30))
